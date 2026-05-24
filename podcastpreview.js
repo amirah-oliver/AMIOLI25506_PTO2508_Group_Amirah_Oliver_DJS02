@@ -2,7 +2,7 @@ class PodcastPreview extends HTMLElement {
   constructor() { 
     super();
 
-    this.attachShadow({ mode: "open" });
+    this.attachShadow({ mode: "open" }); 
   }
 
   static get observedAttributes() {
