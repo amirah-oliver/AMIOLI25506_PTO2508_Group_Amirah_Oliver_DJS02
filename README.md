@@ -1,64 +1,134 @@
-# DJS02 – Web Component: Podcast Preview
+# 🎧 Podcast Preview Web Component
 
-## Overview
+This project uses a reusable Web Component called:
 
-In this project, you will build a reusable and encapsulated **custom HTML element** that displays a podcast preview. The component must follow the **Web Component standard**, using `customElements.define()` and should work independently from the main application logic. This component will enhance modularity, promote reuse, and reduce code duplication across the app.
+<podcast-preview></podcast-preview>
 
-The component should be designed to **accept podcast data via attributes or properties**, display relevant UI elements (such as title, cover image, and genres), and **communicate with the main application** through custom events.
+The component displays:
 
----
+- Podcast image
+- Podcast title
+- Genres
+- Number of seasons
+- Last updated date
 
-## Core Objectives
-
-### Web Component Functionality
-
-- Create a **custom HTML element** using `customElements.define()`.
-- Accept data (cover image, title, genres, number of seasons, and last updated date) **as attributes or properties**.
-- Keep the component **stateless** and reliant on external data provided by the parent.
-- Use **Shadow DOM** for style and logic encapsulation to avoid global conflicts.
-- Trigger a **custom event** when a user interacts with the component (e.g., clicking), so that the parent application can open a modal or take other actions without tightly coupling to the component’s logic.
+It also sends an event when a user clicks on the card.
 
 ---
 
-## UI/UX Requirements
+# 📁 Files
 
-- The component should render a clean and **visually consistent preview** of each podcast.
-- Display:
-  - Podcast **cover image**
-  - Podcast **title**
-  - **Genre names**
-  - **Number of seasons**
-  - **Last updated** in a human-readable format
-- The component must be **responsive**, and match the overall app design on desktop and mobile.
-- On click, the component must notify the parent app to **open a modal** or navigate to details.
+index.html  
+styles.css  
+app.js  
+data.js  
+PodcastPreview.js  
+README.md  
 
 ---
 
-## Code Quality & Maintainability
+# 🚀 How To Register The Component
 
-- Write clear, consistent, and modular code.
-- Follow **functional and object-oriented programming** patterns.
-- Document major functions using **JSDoc comments** (parameters, return types, etc.).
-- Use consistent **code formatting** across HTML, CSS, and JavaScript.
+Inside index.html add:
 
----
+```html
+<script type="module" src="./PodcastPreview.js"></script>
+<script type="module" src="./app.js"></script>
+The component is registered inside PodcastPreview.js using:
 
-## Technical Constraints
+customElements.define(
+  "podcast-preview",
+  PodcastPreview
+);
 
-- Do **not** use any third-party frameworks for creating the web component.
-- Use **native JavaScript (ES6+)**, HTML, and CSS.
-- No page reloads or navigation.
-- Ensure compatibility with modern browsers.
+🧩 How To Use The Component
 
----
+Example:
 
-## Deliverables
+<podcast-preview
+  podcast-id="10716"
+  title="Something Was Wrong"
+  image="podcast-image.jpg"
+  genres="Personal Growth, Investigative Journalism"
+  seasons="14"
+  updated="2022-11-03T07:00:00.000Z"
+>
+</podcast-preview>
+📦 Passing Data
 
-- A working custom Web Component file (e.g., `PodcastPreview.js`).
-- An HTML demo page showcasing the component usage.
-- A `README.md` file with:
-  - How to use and register the component
-  - Instructions for passing data
-  - How to listen for interaction events
+The component receives data using attributes.
 
----
+Attribute	Purpose
+podcast-id	Podcast ID
+title	Podcast title
+image	Cover image
+genres	Podcast genres
+seasons	Number of seasons
+updated	Updated date
+
+Example in app.js:
+
+card.setAttribute(
+  "title",
+  podcast.title
+);
+
+card.setAttribute(
+  "image",
+  podcast.image
+);
+
+card.setAttribute(
+  "genres",
+  genreNames.join(", ")
+);
+
+card.setAttribute(
+  "seasons",
+  podcast.seasons
+);
+
+card.setAttribute(
+  "updated",
+  podcast.updated
+);
+🎯 Listening For Events
+
+When the card is clicked, it sends a custom event called:
+
+"podcast-selected"
+
+Example:
+
+card.addEventListener(
+  "podcast-selected",
+  () => {
+    this.openModal(podcast);
+  }
+);
+
+You can also get the podcast ID:
+
+document.addEventListener(
+  "podcast-selected",
+  (event) => {
+    console.log(event.detail.id);
+  }
+);
+🛡️ Shadow DOM
+
+The component uses Shadow DOM to keep styles separate from the rest of the app.
+
+this.attachShadow({ mode: "open" });
+📱 Responsive Design
+
+The component works on:
+
+Desktop
+Tablet
+Mobile
+💻 Built With
+HTML
+CSS
+JavaScript
+Web Components
