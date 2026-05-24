@@ -1,4 +1,4 @@
-# 🎧 Podcast Preview Web Component
+# 🎧 Podcast Preview Web Component 
 
 This project uses a reusable Web Component called:
 
@@ -123,12 +123,12 @@ this.attachShadow({ mode: "open" });
 📱 Responsive Design
 
 The component works on:
+-Desktop
+-Tablet
+-Mobile
 
-Desktop
-Tablet
-Mobile
 💻 Built With
-HTML
-CSS
-JavaScript
-Web Components
+-HTML
+-CSS
+-JavaScript
+-Web Components
